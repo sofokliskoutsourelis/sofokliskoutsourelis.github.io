@@ -1,0 +1,11 @@
+#!/bin/bash
+cd ~/Desktop/homepage
+eval "$(ssh-agent -s)"
+textutil -convert html index.webarchive
+sed -i.bak 's/file:\/\///g' index.html
+rm index.html.bak
+git fetch origin
+git add index.html
+git add *.png
+git commit -m 'feat(content): Update of content'
+git push -ff origin master
